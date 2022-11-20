@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: Blog MVP
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Posts
+  - name: Comments
+paths:
+  /posts:
+    get:
+      tags:
+        - Posts
+      summary: Get posts
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Posts
+      summary: Create new post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Post Title
+                content:
+                  type: string
+                  example: <p>Post HTML content</p>
+                headerFile:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/{postId}:
+    get:
+      tags:
+        - Posts
+      summary: Get post by ID
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the post to get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Posts
+      summary: Update post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the post to get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                content: <h1>Updating from postman</h1>
+                title: Post updated
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Posts
+      summary: New Request
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the post to get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/by-title:
+    get:
+      tags:
+        - Posts
+      summary: Get posts by title
+      parameters:
+        - name: title
+          in: query
+          schema:
+            type: string
+          example: News
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /comments:
+    get:
+      tags:
+        - Comments
+      summary: Get comments
+      parameters:
+        - in: query
+          name: postId
+          schema:
+            type: integer
+          description: Numeric ID of the post to get comments
+          required: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Comments
+      summary: Create comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                author: John Doe
+                content: This is a comment
+                postId: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /comments/{commentId}:
+    get:
+      tags:
+        - Comments
+      summary: Get comment by ID
+      parameters:
+        - in: path
+          name: commentId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the comment to get
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Comments
+      summary: Update comment
+      parameters:
+        - in: path
+          name: commentId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the comment to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                author: John Doe
+                content: This is an updated comment
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Comments
+      summary: Delete comment
+      parameters:
+        - in: path
+          name: commentId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the comment to delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

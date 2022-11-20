@@ -1,0 +1,15 @@
+# Node
+node_modules
+
+# Dotenv
+.env
+.env.development
+.env.test
+.env.production
+
+# Compiled files
+build
+
+# NPM / Yarn
+package-lock.json
+yarn.lock
