@@ -42,7 +42,7 @@ server.use(
   "/docs",
   swaggerUi.serve,
   swaggerUi.setup(specs, {
-    customSiteTitle: "Documentación de REST APIs - Harweb Bridge",
+    customSiteTitle: "REST API documentation - Blog MVP",
   })
 );
 
